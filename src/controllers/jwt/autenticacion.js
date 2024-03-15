@@ -37,7 +37,6 @@ async function autenticacionPorHeader (req, res, next, roles) {
 
 async function autenticacion (token, roles) {
     try {
-        console.log(token, roles)
         if (token === undefined) {
             return 'Debes suministrar un token de sesion' // Debes suministrar un token de sesion
         }
