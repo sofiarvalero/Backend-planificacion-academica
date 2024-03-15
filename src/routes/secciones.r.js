@@ -29,7 +29,8 @@ router.get("/:id", function (req, res, next) {
 router.post("/", function (req, res, next) {
     seccionesControllers.agregar(req.body)
     .then((resultado) => {
-        res.status(201).json({"seccion_agregada": resultado, "mensaje": "Agregada con éxito la seccion"})
+        res.render('', {mensaje: "Agregada con éxito la sección"})
+        // res.status(201).json({"seccion_agregada": resultado, "mensaje": "Agregada con éxito la seccion"})
     })
     .catch((error) => {
         res.status(400).json({"error": error})
@@ -52,6 +53,30 @@ router.delete("/:id", function (req, res, next) {
     seccionesControllers.eliminar(req.params.id, req.body)
     .then((resultado) => {
         res.status(200).json({"seccion_eliminada": resultado, "mensaje": "Eliminada con éxito la sección"})
+    })
+    .catch((error) => {
+        res.status(400).json({"error": error})
+    })
+});
+
+// Eliminar secciones
+router.post("/eliminar/:id", function (req, res, next) {
+    seccionesControllers.eliminar(req.params.id, req.body)
+    .then((resultado) => {
+        res.render('', {mensaje: "Eliminada con éxito la sección"})
+        // res.status(200).json({"seccion_eliminada": resultado, "mensaje": "Eliminada con éxito la sección"})
+    })
+    .catch((error) => {
+        res.status(400).json({"error": error})
+    })
+});
+
+// Actualizar secciones
+router.post("/editar/:id", function (req, res, next) {
+    seccionesControllers.actualizar(req.params.id ,req.body)
+    .then((resultado) => {
+        res.render('', {mensaje: "Editado con éxito la sección"})
+        // res.status(201).json({"seccion_editada": resultado, "mensaje": "Editada con éxito la sección"})
     })
     .catch((error) => {
         res.status(400).json({"error": error})

@@ -27,7 +27,7 @@ router.post('/acceder', function(req, res, next) {
 // Index
 router.get('/', async function(req, res, next) {
     try {
-        res.render('index')
+        res.render('index', {mensaje: "Bienvenido a la Universidad"})
     } catch (error) {
         res.status(400).json({mensaje: error})
     }

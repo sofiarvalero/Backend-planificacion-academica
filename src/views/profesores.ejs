@@ -18,19 +18,23 @@
                         <form action="profesores" method="post">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre del Profesor</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre..." required>
+                                <input type="text" class="form-control" name="nombre" id="nombre"
+                                    placeholder="Nombre..." required>
                             </div>
                             <div class="mb-3">
                                 <label for="telefono" class="form-label">Teléfono del Profesor</label>
-                                <input type="number" class="form-control" name="telefono" id="telefono" placeholder="Teléfono..." required>
+                                <input type="number" class="form-control" name="telefono" id="telefono"
+                                    placeholder="Teléfono..." required>
                             </div>
                             <div class="mb-3">
                                 <label for="cedula" class="form-label">Cédula del Profesor</label>
-                                <input type="number" class="form-control" name="cedula" id="cedula" placeholder="Cédula..." required>
+                                <input type="number" class="form-control" name="cedula" id="cedula"
+                                    placeholder="Cédula..." required>
                             </div>
                             <div class="mb-3">
                                 <label for="token" class="form-label">Token de acceso</label>
-                                <input type="text" class="form-control" name="token" id="token" placeholder="Token..." required>
+                                <input type="text" class="form-control" name="token" id="token" placeholder="Token..."
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-success">Agregar Profesor</button>
                         </form>
@@ -50,6 +54,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Cédula</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +70,91 @@
                                 <%= row.telefono %>
                             </td>
                             <td>
-                               V-<%= row.cedula %>
+                                V-<%= row.cedula %>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                                    data-bs-target="#<%=row._id %>2">Editar</button>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#<%=row._id %>">Eliminar</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="<%=row._id %>" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel3">Eliminar Profesor
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="profesores/eliminar/<%=row._id %>" method="post">
+                                                    <div class="mb-3">
+                                                        <label for="token" class="form-label">Token de acceso</label>
+                                                        <input type="text" class="form-control" name="token" id="token"
+                                                            placeholder="Token..." required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-danger">Eliminar
+                                                        Profesor</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="<%=row._id %>2" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Profesor
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="profesores/editar/<%=row._id %>" method="post">
+                                                    <div class="mb-3">
+                                                        <label for="nombre" class="form-label">Nombre del
+                                                            Profesor</label>
+                                                        <input type="text" class="form-control" name="nombre"
+                                                            id="nombre" placeholder="<%=row.nombre%>" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="telefono" class="form-label">Teléfono del
+                                                            Profesor</label>
+                                                        <input type="number" class="form-control" name="telefono"
+                                                            id="telefono" placeholder="<%=row.telefono%>" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="cedula" class="form-label">Cédula del
+                                                            Profesor</label>
+                                                        <input type="number" class="form-control" name="cedula"
+                                                            id="cedula" placeholder="<%=row.cedula%>"  required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="token" class="form-label">Token de acceso</label>
+                                                        <input type="text" class="form-control" name="token" id="token"
+                                                            placeholder="Token..." required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success">Editar
+                                                        Profesor</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <% }) %>
