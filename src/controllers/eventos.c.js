@@ -1,5 +1,6 @@
 const eventosModel = require('../models/eventos.m.js');
 const materiasModel = require("../models/materias.m.js");
+const { autenticacion } = require('./jwt/autenticacion.js');
 
 class eventosControllers {
   async listar() {
@@ -33,6 +34,10 @@ class eventosControllers {
   async agregar(evento) {
     return new Promise(async (resolve, reject) => {
       try {
+        const acceso = await autenticacion(evento.token, ['profesor', 'director'])
+        if (acceso != 'acceso permitido') {
+          return reject(acceso)
+        }
         const verificiacionMateria = await materiasModel.findById(evento.materiaId); // Validamos que exista la materia
         if (!verificiacionMateria) {
           return reject("No existe la Materia que deseas agregar el evento")
@@ -57,6 +62,10 @@ class eventosControllers {
   async actualizar(id, evento) {
     return new Promise(async (resolve, reject) => {
       try {
+        const acceso = await autenticacion(evento.token, ['profesor', 'director'])
+        if (acceso != 'acceso permitido') {
+          return reject(acceso)
+        }
         const verificacionExisteId = await eventosModel.findById(id); // Validamos que exista el evento a editar
         if (!verificacionExisteId) {
           return reject("No existe el evento")
@@ -88,16 +97,20 @@ class eventosControllers {
     });
   }
 
-  async eliminar(id) {
+  async eliminar(id, evento) {
     return new Promise(async (resolve, reject) => {
       try {
+        const acceso = await autenticacion(evento.token, ['profesor', 'director'])
+        if (acceso != 'acceso permitido') {
+          return reject(acceso)
+        }
         const verificacionExisteId = await eventosModel.findById(id); // Validamos que exista el evento a eliminar
         if (!verificacionExisteId) {
-            return reject("No existe el evento")
+          return reject("No existe el evento")
         }
         const datos = await eventosModel.findByIdAndDelete(id); // Eliminamos el evento
         if (datos) {
-            return resolve(datos)
+          return resolve(datos)
         }
         return reject("No se pudo eliminar el evento")
       } catch (error) {

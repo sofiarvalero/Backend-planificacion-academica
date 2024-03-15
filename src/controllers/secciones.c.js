@@ -1,5 +1,6 @@
 const materiasModel = require("../models/materias.m.js");
 const seccionesModel = require("../models/secciones.m.js");
+const { autenticacion } = require("./jwt/autenticacion.js");
 
 class seccionesControllers {
   async listar() {
@@ -33,6 +34,10 @@ class seccionesControllers {
   async agregar(seccion) {
     return new Promise(async (resolve, reject) => {
       try {
+        const acceso = await autenticacion(seccion.token, ['director'])
+        if (acceso != 'acceso permitido') {
+          return reject(acceso)
+        }
         const verificacionExiste = await seccionesModel.find({nombre: seccion.nombre}); // Validamos que no se repitan las secciones
         if (verificacionExiste.length > 0) {
             return reject("Ya existe una materia con ese nombre");
@@ -60,6 +65,10 @@ class seccionesControllers {
   async actualizar(id, seccion) {
     return new Promise(async (resolve, reject) => {
       try {
+        const acceso = await autenticacion(seccion.token, ['director'])
+        if (acceso != 'acceso permitido') {
+          return reject(acceso)
+        }
         const verificacionExisteId = await seccionesModel.findById(id); // Validamos que exista la seccion a editar
         if (!verificacionExisteId) {
             return reject("No existe la sección")
@@ -93,9 +102,13 @@ class seccionesControllers {
     });
   }
 
-  async eliminar(id) {
+  async eliminar(id, seccion) {
     return new Promise(async (resolve, reject) => {
       try {
+        const acceso = await autenticacion(seccion.token, ['director'])
+        if (acceso != 'acceso permitido') {
+          return reject(acceso)
+        }
         const verificacionExisteId = await seccionesModel.findById(id); // Validamos que exista la seccion a eliminar
         if (!verificacionExisteId) {
             return reject("No existe la seccion")

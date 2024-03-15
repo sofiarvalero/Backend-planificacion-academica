@@ -48,7 +48,7 @@ router.put("/:id", function (req, res, next) {
 
 // Eliminar Materias
 router.delete("/:id", function (req, res, next) {
-    materiasControllers.eliminar(req.params.id)
+    materiasControllers.eliminar(req.params.id, req.body)
     .then((resultado) => {
         res.status(200).json({"materia_eliminada": resultado, "mensaje": "Eliminada con éxito la materia"})
     })

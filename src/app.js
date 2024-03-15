@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 const db = require('./database/conexion')
 
-const users = require('./routes/users');
+const usuarios = require('./routes/usuarios.r');
 const profesores = require('./routes/profesores.r');
 const secciones = require('./routes/secciones.r');
 const materias = require('./routes/materias.r');
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/users', users);
+app.use('/usuarios', usuarios);
 app.use('/profesores', profesores);
 app.use('/secciones', secciones);
 app.use('/materias', materias);

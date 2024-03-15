@@ -48,7 +48,7 @@ router.put("/:id", function (req, res, next) {
 
 // Eliminar secciones
 router.delete("/:id", function (req, res, next) {
-    seccionesControllers.eliminar(req.params.id)
+    seccionesControllers.eliminar(req.params.id, req.body)
     .then((resultado) => {
         res.status(200).json({"seccion_eliminada": resultado, "mensaje": "Eliminada con éxito la sección"})
     })

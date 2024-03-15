@@ -48,7 +48,7 @@ router.put("/:id", function (req, res, next) {
 
 // Eliminar profesores
 router.delete("/:id", function (req, res, next) {
-    profesoresControllers.eliminar(req.params.id)
+    profesoresControllers.eliminar(req.params.id, req.body)
     .then((resultado) => {
         res.status(200).json({"profesor_eliminar": resultado, "mensaje": "Eliminado con éxito el profesor"})
     })

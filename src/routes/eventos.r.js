@@ -48,7 +48,7 @@ router.put("/:id", function (req, res, next) {
 
 // Eliminar eventos
 router.delete("/:id", function (req, res, next) {
-    eventosControllers.eliminar(req.params.id)
+    eventosControllers.eliminar(req.params.id, req.body)
     .then((resultado) => {
         res.status(200).json({"evento_eliminado": resultado, "mensaje": "Eliminado con éxito el evento"})
     })
