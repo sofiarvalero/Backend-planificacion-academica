@@ -24,7 +24,7 @@ router.get("/:id", function (req, res, next) {
     })
 });
 
-// Agregar Materias
+// Agregar profesores
 router.post("/", function (req, res, next) {
     profesoresControllers.agregar(req.body)
     .then((resultado) => {
@@ -35,7 +35,7 @@ router.post("/", function (req, res, next) {
     })
 });
 
-// Actualizar Materias
+// Actualizar profesores
 router.put("/:id", function (req, res, next) {
     profesoresControllers.actualizar(req.params.id ,req.body)
     .then((resultado) => {
@@ -46,7 +46,7 @@ router.put("/:id", function (req, res, next) {
     })
 });
 
-// Eliminar Materias
+// Eliminar profesores
 router.delete("/:id", function (req, res, next) {
     profesoresControllers.eliminar(req.params.id)
     .then((resultado) => {
