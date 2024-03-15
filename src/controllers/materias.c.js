@@ -7,7 +7,7 @@ class materiasControllers {
       try {
         const datos = await materiasModel.find();
         if (!datos) {
-          return reject("No hay Servicios Registrados");
+          return reject("No hay Materias Registradas");
         }
         resolve(datos); //enviamos respuesta de la promesa
       } catch (error) {
