@@ -5,6 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const db = require('./database/conexion')
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -43,5 +44,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+db();
 
 module.exports = app;
