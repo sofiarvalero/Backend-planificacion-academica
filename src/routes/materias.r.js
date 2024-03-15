@@ -60,7 +60,7 @@ router.delete("/:id", function (req, res, next) {
 });
 
 // Eliminar Materias
-router.post("/delete/:id", function (req, res, next) {
+router.post("/eliminar/:id", function (req, res, next) {
     materiasControllers.eliminar(req.params.id, req.body)
     .then((resultado) => {
         res.render('', {mensaje: "Eliminada con éxito la materia"})

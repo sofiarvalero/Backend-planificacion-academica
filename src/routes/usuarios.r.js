@@ -6,7 +6,8 @@ const usuariosControllers = require('../controllers/usuarios.c')
 router.post('/registrar', function(req, res, next) {
     usuariosControllers.registrar(req.body)
     .then((resultado) => {
-        res.status(201).json({"usuario_registrado": resultado, "mensaje": "Registrado con exito"})
+        res.render('', {mensaje: "Registrado con exito el usuario" + resultado.usuario})
+        // res.status(201).json({"usuario_registrado": resultado, "mensaje": "Registrado con exito"})
     })
     .catch((error) => {
         res.status(400).json({"error": error})
@@ -17,7 +18,9 @@ router.post('/registrar', function(req, res, next) {
 router.post('/acceder', function(req, res, next) {
     usuariosControllers.acceder(req.body)
     .then((resultado) => {
-        res.status(200).json({"inicio_sesion": resultado, "mensaje": "Has iniciado sesion con exito"})
+        res.render('token', {token: resultado.token})
+
+        // res.status(200).json({"inicio_sesion": resultado, "mensaje": "Has iniciado sesion con exito"})
     })
     .catch((error) => {
         res.status(400).json({mensaje: error})

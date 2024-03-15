@@ -1,5 +1,7 @@
 const materiasModel = require("../models/materias.m.js");
 const profesoresModel = require("../models/profesores.m.js");
+const seccionesModel = require("../models/secciones.m.js");
+const eventosModel = require("../models/eventos.m.js");
 const { autenticacion } = require("./jwt/autenticacion.js");
 
 class materiasControllers {
@@ -118,6 +120,8 @@ class materiasControllers {
         }
         const datos = await materiasModel.findByIdAndDelete(id); // Eliminamos la materia
         if (datos) {
+          await seccionesModel.deleteMany({materiaId: id})
+          await eventosModel.deleteMany({materiaId: id})
           return resolve(datos)
         }
         return reject("No se pudo eliminar la materia")
