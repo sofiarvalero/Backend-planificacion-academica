@@ -7,8 +7,11 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 const db = require('./database/conexion')
 
-const index = require('./routes/index');
 const users = require('./routes/users');
+const profesores = require('./routes/profesores.r');
+const secciones = require('./routes/secciones.r');
+const materias = require('./routes/materias.r');
+const eventos = require('./routes/eventos.r');
 
 const app = express();
 
@@ -24,8 +27,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 app.use('/users', users);
+app.use('/profesores', profesores);
+app.use('/secciones', secciones);
+app.use('/materias', materias);
+app.use('/eventos', eventos);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
