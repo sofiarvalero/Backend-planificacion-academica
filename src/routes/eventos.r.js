@@ -6,7 +6,8 @@ const eventosControllers = require('../controllers/eventos.c')
 router.get('/', function(req, res, next) {
     eventosControllers.listar()
     .then((resultado) => {
-        res.status(200).json({"eventos": resultado, "mensaje": "Listado con éxito los eventos"})
+        res.render('eventos', {eventos: resultado})
+        //res.status(200).json({"eventos": resultado, "mensaje": "Listado con éxito los eventos"})
     })
     .catch((error) => {
         res.status(400).json({"error": error})

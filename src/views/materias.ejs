@@ -1,0 +1,41 @@
+<%- include('layout/header') %>
+    <div class="container mt-5">
+        <h1 class="mb-5">Listado de Materias</h1>
+        <% if (materias.length > 0) { %>
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Profesor ID</th>
+                    <th scope="col">Unidades de Crédito</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% materias.forEach((row, index)=> { %>
+                    <tr class="table-primary border-primary">
+                        <td scope="row">
+                            <%= row._id %>
+                        </td>
+                        <td>
+                            <%= row.nombre %>
+                        </td>
+                        <td>
+                            <%= row.descripcion %>
+                        </td>
+                        <td>
+                            <%= row.profesorId %>
+                        </td>
+                        <td>
+                            <%= row.creditos %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <h3>No hay Materias Registradas...</h3>
+        <% } %>
+    </div>
+    <%- include('layout/footer') %>

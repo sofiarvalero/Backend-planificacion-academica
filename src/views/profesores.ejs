@@ -1,0 +1,37 @@
+<%- include('layout/header') %>
+    <div class="container mt-5">
+        <h1 class="mb-5">Listado de Profesores</h1>
+        <% if (profesores.length > 0) { %>
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Cédula</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% profesores.forEach((row, index)=> { %>
+                    <tr class="table-primary border-primary">
+                        <td  scope="row">
+                            <%= row._id %>
+                        </td>
+                        <td>
+                            <%= row.nombre %>
+                        </td>
+                        <td>
+                            <%= row.telefono %>
+                        </td>
+                        <td>
+                            <%= row.cedula %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <h3>No hay Profesores Registrados...</h3>
+        <% } %>
+    </div>
+    <%- include('layout/footer') %>

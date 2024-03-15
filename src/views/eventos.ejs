@@ -1,0 +1,41 @@
+<%- include('layout/header') %>
+    <div class="container mt-5">
+        <h1 class="mb-5">Listado de Eventos</h1>
+        <% if (eventos.length > 0) { %>
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Materia ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% eventos.forEach((row, index)=> { %>
+                    <tr class="table-primary border-primary">
+                        <td scope="row">
+                            <%= row._id %>
+                        </td>
+                        <td>
+                            <%= row.tipo %>
+                        </td>
+                        <td>
+                            <%= row.descripcion %>
+                        </td>
+                        <td>
+                            <%= row.fecha %>
+                        </td>
+                        <td>
+                            <%= row.materiaId %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <h3>No hay Eventos Registrados...</h3>
+        <% } %>
+    </div>
+    <%- include('layout/footer') %>
